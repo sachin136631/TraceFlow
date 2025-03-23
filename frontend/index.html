@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Pixel</title>
+</head>
+<body>
+    <h1>Test Page for Tracking Pixel</h1>
+    <button class="add-to-cart">Add to Cart</button>
+    <a href="#" class="buy-now">Buy Now</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const script = document.createElement("script");
+            script.src = "http://localhost:5000/pixel.js?id=12345";
+            script.async = true;
+            document.head.appendChild(script);
+        });
+    </script>
+</body>
+</html>

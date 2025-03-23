@@ -11,6 +11,7 @@ dotenv.config();
 
 const port=process.env.PORT||5000;
 const trackingPixels={};
+const trackedEvents=[];
 
 app.post('/generatePixel',(req,res)=>{
     const {productUrl}=req.body;
@@ -25,13 +26,16 @@ app.post('/generatePixel',(req,res)=>{
     }
 })
 
-app.post('/trackEvent',(req,res)=>{
+app.post('/trackevent',(req,res)=>{
+    console.log("*********** Event Tracking Received ***********");
+    console.log("Request Body:", req.body);
     const{pixelId,eventType,timestamp}=req.body;
     if(!pixelId||!eventType){
         return res.status(400).json({error:"missing pixelId or event type"});
     }
     else{
         console.log(`Event recieved ${eventType} for pixel id ${pixelId} at timestamp ${timestamp}`);
+        trackedEvents.push({ pixelId, eventType, timestamp });
         res.send("success");
     }
 })
